@@ -1,0 +1,260 @@
+[
+    {
+        "id": "8de45607.e76588",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ebabc43f.b02cb8",
+        "type": "ui_switch",
+        "z": "8de45607.e76588",
+        "name": "LED",
+        "label": "LED",
+        "tooltip": "",
+        "group": "42c04b4a.38e9b4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "2123bdd7.fbe062"
+            ]
+        ]
+    },
+    {
+        "id": "a4ac8393.0ea7c",
+        "type": "ui_gauge",
+        "z": "8de45607.e76588",
+        "name": "Humidity",
+        "group": "b2cef4ec.6fab18",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 780,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "295c0050.66ae9",
+        "type": "rpi-dht22",
+        "z": "8de45607.e76588",
+        "name": "DHT11",
+        "topic": "rpi-dht22",
+        "dht": "11",
+        "pintype": "0",
+        "pin": 4,
+        "x": 360,
+        "y": 460,
+        "wires": [
+            [
+                "fde12dae.93c6",
+                "5975db0.94b7124"
+            ]
+        ]
+    },
+    {
+        "id": "e847a1a2.8401b",
+        "type": "inject",
+        "z": "8de45607.e76588",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "295c0050.66ae9"
+            ]
+        ]
+    },
+    {
+        "id": "4e1f7889.80a2d8",
+        "type": "debug",
+        "z": "8de45607.e76588",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "fde12dae.93c6",
+        "type": "function",
+        "z": "8de45607.e76588",
+        "name": "Temperature",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 550,
+        "y": 380,
+        "wires": [
+            [
+                "f219748b.ef99f8",
+                "b034e713.b22e78"
+            ]
+        ]
+    },
+    {
+        "id": "5975db0.94b7124",
+        "type": "function",
+        "z": "8de45607.e76588",
+        "name": "Humidity ",
+        "func": "msg.payload=msg.humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 550,
+        "y": 520,
+        "wires": [
+            [
+                "4e1f7889.80a2d8",
+                "a4ac8393.0ea7c"
+            ]
+        ]
+    },
+    {
+        "id": "f219748b.ef99f8",
+        "type": "debug",
+        "z": "8de45607.e76588",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b034e713.b22e78",
+        "type": "ui_gauge",
+        "z": "8de45607.e76588",
+        "name": "Temperature",
+        "group": "b2cef4ec.6fab18",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 770,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2123bdd7.fbe062",
+        "type": "rpi-gpio out",
+        "z": "8de45607.e76588",
+        "name": "LED",
+        "pin": "37",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 350,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "42c04b4a.38e9b4",
+        "type": "ui_group",
+        "name": "Bedroom",
+        "tab": "df725c1.ab023a",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "b2cef4ec.6fab18",
+        "type": "ui_group",
+        "name": "Bedroom",
+        "tab": "e7c14b4b.e6c7d8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "df725c1.ab023a",
+        "type": "ui_tab",
+        "name": "Bedroom Control",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e7c14b4b.e6c7d8",
+        "type": "ui_tab",
+        "name": "Bedroom Sensor",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
