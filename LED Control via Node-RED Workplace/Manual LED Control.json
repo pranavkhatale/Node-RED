@@ -1,0 +1,99 @@
+[
+    {
+        "id": "8fb17a8c.d24c98",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6ce08378.38bebc",
+        "type": "inject",
+        "z": "8fb17a8c.d24c98",
+        "name": "LED ON",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "3a2b63ac.fd1cdc",
+                "5ff4b01b.97599"
+            ]
+        ]
+    },
+    {
+        "id": "a3a7ba82.48bdd8",
+        "type": "inject",
+        "z": "8fb17a8c.d24c98",
+        "name": "LED OFF",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "3a2b63ac.fd1cdc",
+                "5ff4b01b.97599"
+            ]
+        ]
+    },
+    {
+        "id": "3a2b63ac.fd1cdc",
+        "type": "rpi-gpio out",
+        "z": "8fb17a8c.d24c98",
+        "name": "",
+        "pin": "37",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 440,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "5ff4b01b.97599",
+        "type": "debug",
+        "z": "8fb17a8c.d24c98",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 220,
+        "wires": []
+    }
+]
